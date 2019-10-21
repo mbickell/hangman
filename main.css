@@ -1,0 +1,15 @@
+h1{
+  color: rgb(214, 87, 93);
+}
+
+body{
+  background-image: url("./imgs/ancient-antique-art-759550.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-repeat: center;
+}
+
+span{
+  font-size: 2em;
+  color: white;
+}
