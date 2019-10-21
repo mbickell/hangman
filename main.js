@@ -80,24 +80,40 @@ const generateRandomNumber = array => {
   return Math.floor(Math.random() * array.length);
 }
 
-let wrongGuesses = 0;
-word = words[generateRandomNumber(words)].split("");
-guesses = [];
-while (guesses.length < word.length) {
-  guesses.push("_")
+const pickWord = (array, number) => {
+  return array[number].split("");
 }
 
+const makeGuessArray = array => {
+  let guesses = [];
+  while (guesses.length < array.length) {
+    guesses.push("_")
+  }
+  return guesses;
+}
+
+const render = () => {
+  for (let index = 0; index < word.length; index++) {
+    inputField.innerHTML = `<span>${guesses}</span>`
+  }
+}
+
+let wrongGuesses = 0;
+let word = pickWord(words, generateRandomNumber(words))
+console.log(word)
+let guesses = makeGuessArray(word)
+
 document.onkeydown = (event) => {
-  if (word.includes(event.key)) {
+  if (wrongGuesses >= 6) {
+    alert("Die!")
+  } else if (word.includes(event.key)) {
     for (let index = 0; index < word.length; index++) {
       if (event.key === word[index]) {
         guesses[index] = event.key;
         render();
       }
     }
-  } else if (wrongGuesses >= 6){
-    alert("Die!")
-  } else{
+  } else {
     drawArray[wrongGuesses]();
     wrongGuesses++
   }
@@ -105,10 +121,6 @@ document.onkeydown = (event) => {
 
 let inputField = document.getElementById("input");
 
-const render = () => {
-  for (let index = 0; index < word.length; index++) {
-    inputField.innerHTML = `<span>${guesses}</span>`
-  }
-}
+
 
 render();
