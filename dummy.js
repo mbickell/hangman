@@ -60,12 +60,62 @@ const leftLeg = () => {
   draw(60, 70, 20, 100);
 };
 
-drawArray = [head, torso, leftArm, rightArm, leftLeg, rightLeg];
+const drawArray = [head, torso, leftArm, rightArm, leftLeg, rightLeg];
 
 frame1();
 frame2();
 frame3();
 frame4();
 
+const words = [
+  "cabbage",
+  "cholera",
+  "shotgun",
+  "etcetera",
+  "hangman"
+];
 
+
+const generateRandomNumber = array => {
+  return Math.floor(Math.random() * array.length);
+}
+
+let wrongGuesses = 0;
+word = words[generateRandomNumber(words)].split("");
+guesses = [];
+while (guesses.length < word.length) {
+  guesses.push("_")
+}
+
+document.onkeydown = (event) => {
+  if (word.includes(event.key)) {
+    for (let index = 0; index < word.length; index++) {
+      if (event.key === word[index]) {
+        console.log(word[index]);
+        guesses[index] = event.key;
+        console.log(guesses);
+        render();
+      }
+    }
+  } else {
+    drawArray[wrongGuesses]();
+    console.log(wrongGuesses)
+    wrongGuesses++
+  }
+}
+
+
+let inputField = document.getElementById("input");
+
+const render = () => {
+  for (let index = 0; index < word.length; index++) {
+    inputField.innerHTML = `<span>${guesses}</span>`
+  }
+}
+
+console.log(word)
+console.log(guesses)
+console.log(generateRandomNumber(words))
+
+render();
 
