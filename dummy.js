@@ -1,7 +1,8 @@
+// Draw hangman
+
 const myStickman = document.getElementById("stickman");
 const context = myStickman.getContext('2d');
-canvas = function () {
-
+const canvas = () => {
   myStickman = document.getElementById("stickman");
   context = myStickman.getContext('2d');
   context.beginPath();
@@ -10,15 +11,12 @@ canvas = function () {
 };
 
 const head = () => {
-  // myStickman = document.getElementById("stickman");
-  // context = myStickman.getContext('2d');
   context.beginPath();
   context.arc(60, 25, 10, 0, Math.PI * 2, true);
   context.stroke();
 }
 
 const draw = ($pathFromx, $pathFromy, $pathTox, $pathToy) => {
-
   context.moveTo($pathFromx, $pathFromy);
   context.lineTo($pathTox, $pathToy);
   context.stroke();
@@ -67,6 +65,8 @@ frame2();
 frame3();
 frame4();
 
+// End draw hangman
+
 const words = [
   "cabbage",
   "cholera",
@@ -74,7 +74,6 @@ const words = [
   "etcetera",
   "hangman"
 ];
-
 
 const generateRandomNumber = array => {
   return Math.floor(Math.random() * array.length);
@@ -91,19 +90,15 @@ document.onkeydown = (event) => {
   if (word.includes(event.key)) {
     for (let index = 0; index < word.length; index++) {
       if (event.key === word[index]) {
-        console.log(word[index]);
         guesses[index] = event.key;
-        console.log(guesses);
         render();
       }
     }
   } else {
     drawArray[wrongGuesses]();
-    console.log(wrongGuesses)
     wrongGuesses++
   }
 }
-
 
 let inputField = document.getElementById("input");
 
@@ -113,9 +108,4 @@ const render = () => {
   }
 }
 
-console.log(word)
-console.log(guesses)
-console.log(generateRandomNumber(words))
-
 render();
-
